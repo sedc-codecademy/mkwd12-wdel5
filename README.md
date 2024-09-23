@@ -1,4 +1,4 @@
-# Build pizza app! with ANGULAR, .NET7 and POSTGRESQL
+# Build pizza app! with ANGULAR, .NET8 and POSTGRESQL
 
 ## Module plan
 1. [Angular] Initializing Angular Project, Creating Components, Routing, Directives, Modules
