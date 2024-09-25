@@ -6,4 +6,18 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Abstractions\" />
+    <Folder Include="Implementations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PizzaApp.Dtos\PizzaApp.Dtos.csproj" />
+    <ProjectReference Include="..\PizzaApp.Shared\PizzaApp.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
