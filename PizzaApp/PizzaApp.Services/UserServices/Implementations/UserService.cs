@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using PizzaApp.Domain.Entities;
 using PizzaApp.Dtos.UserDtos;
 using PizzaApp.Services.UserServices.Abstractions;
 using PizzaApp.Shared.CustomExceptions.UserExceptions;
 using PizzaApp.Shared.Responses;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace PizzaApp.Services.UserServices.Implementations
 {
@@ -12,26 +14,73 @@ namespace PizzaApp.Services.UserServices.Implementations
     {
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
+        private readonly ITokenService _tokenService;
 
-        public UserService(IMapper mapper, UserManager<User> userManager)
+        public UserService(IMapper mapper, ITokenService tokenService, UserManager<User> userManager)
         {
+            _tokenService = tokenService;
             _mapper = mapper;
             _userManager = userManager;
         }
 
-        public Task<CustomResponse> DeleteUserAsync(string id)
+        public async Task<CustomResponse> DeleteUserAsync(string id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var user = await _userManager.FindByIdAsync(id);
+                if (user == null)
+                    return new CustomResponse("User not found!");
+                var result = await _userManager.DeleteAsync(user);
+                if (!result.Succeeded)
+                    return new CustomResponse(result.Errors.Select(x => x.Description));
+                return new CustomResponse();
+            }
+            catch (UserDataException ex)
+            {
+                throw new UserDataException(ex.Message);
+            }
+            catch (UserNotFoundException ex)
+            {
+                throw new UserNotFoundException(ex.Message);
+            }
         }
 
-        public Task<CustomResponse> GetAllUsersAsync()
+        public async Task<CustomResponse> GetAllUsersAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var response = new CustomResponse<List<UserDto>>();
+                var users = await _userManager.Users.ToListAsync();
+                var userDtos = users.Select(user => _mapper.Map<UserDto>(user)).ToList();
+                response.Result = userDtos;
+                response.IsSuccessfull = true;
+                return response;
+            }
+            catch (UserDataException ex) 
+            {
+                throw new UserDataException(ex.Message);
+            }
         }
 
-        public Task<CustomResponse<UserDto>> GetUsersByIdAsync(string id)
+        public async Task<CustomResponse<UserDto>> GetUsersByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var user = await _userManager.FindByIdAsync(id);
+                if(user == null)
+                    return new CustomResponse<UserDto>("User not found!");
+                UserDto userDto = _mapper.Map<UserDto>(user);
+                return new CustomResponse<UserDto>(userDto);
+
+            }
+            catch (UserDataException ex)
+            {
+                throw new UserDataException(ex.Message);
+            }
+            catch (UserNotFoundException ex)
+            {
+                throw new UserNotFoundException(ex.Message);
+            }
         }
 
         public async Task<CustomResponse<LoginUserResponseDto>> LoginUserAsync(LoginUserRequestDto request)
@@ -52,9 +101,13 @@ namespace PizzaApp.Services.UserServices.Implementations
                 if (!IsPasswordValid)
                     return new("invalid password");
 
-                //to be continued on the next class...
-                //var token = await 
-                throw new NotImplementedException(); // za da ne puka
+                var token = await _tokenService.GenerateTokenAsync(user);
+
+                return new CustomResponse<LoginUserResponseDto>(new LoginUserResponseDto
+                    {
+                        Token = new JwtSecurityTokenHandler().WriteToken(token), // using System.IdentityModel.Tokens.Jwt;
+                        ValidTo = token.ValidTo,
+                    });
             }
             catch (UserDataException ex)
             {
@@ -98,9 +151,28 @@ namespace PizzaApp.Services.UserServices.Implementations
             }
         }
 
-        public Task<CustomResponse<UpdateUserDto>> UpdateUserAsync(string id, UpdateUserDto updatedUser)
+        public async Task<CustomResponse<UpdateUserDto>> UpdateUserAsync(string id, UpdateUserDto updatedUser)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var user = await _userManager.FindByIdAsync(id);
+                if (user == null)
+                    return new CustomResponse<UpdateUserDto>("User not found!");
+
+                var result = await _userManager.UpdateAsync(user);
+                if (!result.Succeeded)
+                    return new CustomResponse<UpdateUserDto>(result.Errors.Select(x => x.Description));
+                _mapper.Map(updatedUser, user);
+                return new CustomResponse<UpdateUserDto>(updatedUser);
+            }
+            catch (UserDataException ex)
+            {
+                throw new UserDataException(ex.Message);
+            }
+            catch (UserNotFoundException ex)
+            {
+                throw new UserNotFoundException(ex.Message);
+            }
         }
     }
 }
