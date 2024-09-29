@@ -19,16 +19,18 @@
 1. Install NodeJS - https://nodejs.org/en/download/ (used only the first time) [LTS version]
 2. Confirm installation - `node -v` and `npm -v` should return a value (ex. 18.17.1 and 6.14.15)
 3. Install Angular CLI - `npm install -g @angular/cli` (used only the first time)
-4. `ng version` to check if it's installed
-5. Create a new folder for the project and open the folder in VS Code
-6. Open terminal and create new project - `ng new client`
-   1. Would you like to add Angular routing? - Y
-   2. Which stylesheet format would you like to use? - SCSS
-   3. Would you like to share pseudonymous usage data about this project with the Angular Team
+4. For our project we will need the latest version of the Angular CLI which is version 18. If you want to specify an exact version, you can add that in the command - `npm install -g @angular/cli@18`
+5. `ng version` to check if it's installed
+6. Create a new folder for the project and open the folder in VS Code
+7. Open terminal and create new project - `ng new name-of-the-project`
+   1. Would you like to add Angular routing? - Y - we will need this setting to enhance navigation by allowing users to move between different views or pages seamlessly.
+   2. Do you want to enable Server-Side Rendering (SSR) and Static Site Generation (SSG/Prerendering)? - N - SSR means that the server processes your application, generates the HTML for the page, and sends it to the client. SSG means that pages are pre-rendered at build time, allowing them to be served as static HTML. 
+   3. Which stylesheet format would you like to use? - SCSS - Angular offers different pre-processors and stylesheets to choose from. We will be using SCSS which extends CSS with variables, nested rules, and more powerful mixins
+   4. Would you like to share pseudonymous usage data about this project with the Angular Team
       at Google (not important) - N
-7. Navigate to newly created folder for project `cd client` (if you used a different name than client, change "client" with the name of the folder that was created while using `ng new <THE_NAME>`      
-8. Run app `npm start`
-9. Open project in browser - http://localhost:4200
+8. Navigate to newly created folder for project `cd client` - if you used a different name than client, change "client" with the name of the folder that was created while using `ng new <THE_NAME>`      
+9. Run app `npm start`
+10. Open project in browser - http://localhost:4200
 
 ### Install Angular Material
 1. Install Angular Material - `ng add @angular/material`
@@ -52,7 +54,6 @@
 ### Useful VS Code Extensions (Angular related)
 - AutoImport https://marketplace.visualstudio.com/items?itemName=steoates.autoimport
 - Angular Language Service https://marketplace.visualstudio.com/items?itemName=Angular.ng-template
-
 
 _____________________________________________________________
 ## BACKEND PART CONFIG 
