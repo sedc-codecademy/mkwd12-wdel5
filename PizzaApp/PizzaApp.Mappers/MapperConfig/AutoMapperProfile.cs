@@ -20,6 +20,7 @@ namespace PizzaApp.Mappers.MapperConfig
             CreateMap<Pizza, PizzaDto>().ReverseMap();
             CreateMap<Pizza, AddPizzaDto>().ReverseMap();
             CreateMap<Pizza, UpdatePizzaDto>().ReverseMap();
+            CreateMap<AddPizzaDto, PizzaDto>().ReverseMap();
 
             //OrderMappings
             CreateMap<Order, OrderDto>().ReverseMap();

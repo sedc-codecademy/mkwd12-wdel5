@@ -24,7 +24,8 @@ namespace PizzaApp.Services.Implementations
             try
             {
                 var pizza = _mapper.Map<Pizza>(addPizzaDto);
-                pizza.UserId = addPizzaDto.UserId; // ???
+                //pizza.UserId = addPizzaDto.UserId; // ???
+                pizza.UserId = userId;
                 await _pizzaRepository.Add(pizza);
                 var pizzaDtoResult = _mapper.Map<PizzaDto>(addPizzaDto);
                 return new CustomResponse<PizzaDto>(pizzaDtoResult);

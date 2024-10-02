@@ -1,5 +1,4 @@
-﻿rg
-namespace PizzaApp.Shared.CustomExceptions.PizzaExceptions
+﻿namespace PizzaApp.Shared.CustomExceptions.PizzaExceptions
 {
     public class PizzaDataException : Exception
     {
