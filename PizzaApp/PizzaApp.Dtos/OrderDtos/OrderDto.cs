@@ -1,4 +1,5 @@
 ﻿using PizzaApp.Dtos.PizzaDtos;
+using PizzaApp.Dtos.UserDtos;
 
 namespace PizzaApp.Dtos.OrderDtos
 {
@@ -10,5 +11,6 @@ namespace PizzaApp.Dtos.OrderDtos
         public string? Description { get; set; }
         public int OrderPrice {  get; set; }
         public List<PizzaDto>? Pizzas { get; set; }
+        public UserOrderDto? User { get; set; }
     }
 }

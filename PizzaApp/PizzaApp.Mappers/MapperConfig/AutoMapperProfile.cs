@@ -15,6 +15,7 @@ namespace PizzaApp.Mappers.MapperConfig
             CreateMap<User, RegisterUserRequestDto>().ReverseMap();
             CreateMap<User, UserDto>().ReverseMap();
             CreateMap<User, UpdateUserDto>().ReverseMap();
+            CreateMap<User, UserOrderDto>().ReverseMap();
 
             //PizzaMappings
             CreateMap<Pizza, PizzaDto>().ReverseMap();

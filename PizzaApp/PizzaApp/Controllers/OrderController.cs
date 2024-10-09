@@ -21,11 +21,11 @@ namespace PizzaApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllOrders()
+        public async Task<IActionResult> GetAllOrders(bool IsOrderForUser = false)
         {
             try
             {
-                var response = await _orderService.GetAllOrders();
+                var response = await _orderService.GetAllOrders(IsOrderForUser);
                 return Response(response);
             }
             catch (OrderDataException ex)

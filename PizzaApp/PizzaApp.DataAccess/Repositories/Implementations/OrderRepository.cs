@@ -16,7 +16,8 @@ namespace PizzaApp.DataAccess.Repositories.Implementations
 
         public async Task<List<Order>> GetOrdersWithDetails()
         {
-            var orders = await _pizzaAppDbContext.Order.Include(x => x.Pizzas).ToListAsync();
+            var orders = await _pizzaAppDbContext.Order.Include(x => x.Pizzas)
+                                                       .Include(u => u.User).ToListAsync();
             return orders;
         }
     }

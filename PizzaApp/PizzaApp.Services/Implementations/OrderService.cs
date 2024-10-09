@@ -47,7 +47,7 @@ namespace PizzaApp.Services.Implementations
                 if (order == null) return new CustomResponse("Order not found!");
                 if (order.UserId != userId) return new CustomResponse("You dont have permission to delete this order");
                 await _orderRepository.Remove(order);
-                return new CustomResponse() { IsSuccessfull=true};
+                return new CustomResponse() { IsSuccessfull = true };
             }
             catch (OrderDataException ex)
             {
@@ -55,11 +55,15 @@ namespace PizzaApp.Services.Implementations
             }
         }
 
-        public async Task<CustomResponse<List<OrderDto>>> GetAllOrders()
+        public async Task<CustomResponse<List<OrderDto>>> GetAllOrders(bool IsOrderForUser)
         {
             try
             {
-                var orders = await _orderRepository.GetAll();
+                var orders = new List<Order>();
+                if (IsOrderForUser == true)
+                     orders = await _orderRepository.GetOrdersWithDetails();
+                 orders = await _orderRepository.GetAll();
+
                 var orderDtos = _mapper.Map<List<OrderDto>>(orders);
                 return new CustomResponse<List<OrderDto>>(orderDtos);
             }
@@ -95,7 +99,7 @@ namespace PizzaApp.Services.Implementations
                 updateOrderDto.UserId = userId;
                 await _orderRepository.Update(updatedOrder);
                 var orderDtoResult = _mapper.Map<OrderDto>(order);
-                return new CustomResponse<OrderDto>() { IsSuccessfull=true, Result=orderDtoResult};
+                return new CustomResponse<OrderDto>() { IsSuccessfull = true, Result = orderDtoResult };
             }
             catch (OrderDataException ex)
             {
