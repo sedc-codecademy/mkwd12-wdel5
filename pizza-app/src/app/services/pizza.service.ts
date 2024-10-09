@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { catchError, Observable, of, tap } from 'rxjs';
 import { apiUrl, snackBarConfig } from '../constants/app.constants';
 import { Order, OrderBE, PizzaBE } from '../types/interfaces/order.interface';
+import { convertIngredientsFeToBe } from '../helpers/pizza.helper';
 
 @Injectable({
   providedIn: 'root' // This means that the service will be available in the whole application. It's deprecated, and will be set to 'root' as default in the following version of Angular.
@@ -50,15 +51,15 @@ export class PizzaService {
   }
 
   submitOrder(addressTo: string, description: string): Observable<void> {
-    const pizzas = this.activeOrder();
+    const pizzas = this.activeOrder()
 
     // converting pizza object to fit BE body definition
     const mappedPizzas = pizzas.map((pizza) => ({
       name: pizza.name,
       description: pizza.description,
-      price: Math.round(pizza.price),
-      ingredients: convertIngredientsFeToBe(pizza.ingredients),
-    })) satisfies PizzaBE[] 
+      price: Math.round(pizza.price), // workaround as BE doesn't accept decimals
+      ingredients: convertIngredientsFeToBe(pizza.ingredients)
+    })) satisfies PizzaBE[] // use satisfies instead of 'as' to avoid type casting
 
     const order = {
       pizzas: mappedPizzas,
@@ -66,26 +67,31 @@ export class PizzaService {
       description,
       orderPrice: Math.round(
         pizzas.reduce((acc, pizza) => acc + pizza.price, 0)
-      )
+      ) // workaround as BE doesn't accept decimals
     } satisfies OrderBE
 
     return this.http.post<void>(`${apiUrl}/Order`, order).pipe(
+      // tap operator is used to handle side effects like routing, notifications, etc.
       tap(() => {
         this.snackBar.open(
-          'You have successfully created an order',
+          'You have successfully created an order!',
           'Close',
           snackBarConfig
         )
       }),
-      catchError((error) => {
-        this.snackBar.open(error?.error?.errors?.[0] || `Error while making an order!`,
-          'Close',
-          snackBarConfig
-        );
-        return of();
+      catchError((error) => { // catchError operator is used to handle errors
+        if (error) {
+          this.snackBar.open(
+            error?.error?.errors?.[0] || 'Error while making an order!',
+            'Close',
+            snackBarConfig
+          )
+        }
+        return of()
       })
     )
   }
+
 
   getSavedPizzas(): Observable<Pizza[]> {
     return this.http.get<Pizza[]>(`${apiUrl}/Pizza`);

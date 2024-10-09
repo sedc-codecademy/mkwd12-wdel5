@@ -22,6 +22,6 @@ export interface Order {
 export interface PizzaBE {
   name: string;
   price: number;
-  ingredients: IngredientBE;
-  description: string
+  ingredients: IngredientBE[];
+  description: string;
 }
