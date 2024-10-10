@@ -94,7 +94,6 @@ export class AuthService {
   logout() {
     this.isLoggedIn.set(false);
     this.pizzaService.updateActiveOrder([]);
-    this.pizzaService.currentUser.set(null);
     localStorage.removeItem('token');
     localStorage.removeItem('tokenExpirationDate');
     this.router.navigate(['/login']);

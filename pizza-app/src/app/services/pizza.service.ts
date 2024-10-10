@@ -15,7 +15,6 @@ import { convertIngredientsFeToBe } from '../helpers/pizza.helper';
 export class PizzaService {
   // A signal to expose the active order value to the components.
   activeOrder = signal<Pizza[]>([]);
-  currentUser = signal<string | null>(null);
   selectedIngredients = signal<Ingredient[]>([]);
 
   constructor(
@@ -35,11 +34,6 @@ export class PizzaService {
     const params = new HttpParams().set('isOrderForUser', isOrderForUser.toString());
 
     return this.http.get<Order[]>(`${apiUrl}/Order`, { params }).pipe(
-      tap((response: any) => {
-        if (response && response.user && response.user.username) {
-          this.currentUser.set(response.user.username)
-        }
-      }),
       catchError((error) => {
         this.snackBar.open(error?.error?.errors?.[0] || `Error while fetching orders!`,
           'Close',
