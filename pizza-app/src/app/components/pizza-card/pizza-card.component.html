@@ -1,0 +1,20 @@
+@if (!!pizza) {
+<mat-card>
+  <mat-card-header>{{ pizza.name }}</mat-card-header>
+  <img mat-card-image height="300px" width="300px" [src]="pizza.image" [alt]="pizza.name">
+  <mat-card-content>
+    @for (ingredient of pizza.ingredients; track ingredient) {
+      <mat-chip>
+        {{ingredient | normalizeEnum}}
+      </mat-chip>
+    }
+  </mat-card-content>
+  <mat-card-actions align="end">
+    @if(isLoggedIn()) {
+      <button mat-button color="primary" (click)="selectPizza()">
+        <mat-icon>local_pizza</mat-icon>
+      </button>
+    }
+  </mat-card-actions>
+</mat-card>
+}

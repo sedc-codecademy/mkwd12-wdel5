@@ -1,0 +1,9 @@
+<mat-grid-list [cols]="breakPoint" rowHeight="500px" (window:resize)="onResize($event)">
+  @for (pizzaFromParent of pizzas; track pizzaFromParent.id) {
+    <!-- render each pizza card -->
+    <!-- send data for each pizza to the pizza-card component -->
+    <mat-grid-tile>
+      <app-pizza-card [pizza]="pizzaFromParent"></app-pizza-card>
+  </mat-grid-tile>
+  }  
+</mat-grid-list>

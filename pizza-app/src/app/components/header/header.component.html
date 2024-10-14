@@ -1,1 +1,28 @@
-<p>header works!</p>
+<mat-toolbar>
+  <button mat-button routerLink="/">
+    <mat-icon>local_pizza</mat-icon>
+  </button>
+  <span class="logo" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+    Pizza App
+  </span>
+   <!--  routerLink is used as a part of RoutingModule, to tell Angular to use Angular routing instead of default browser routing, and navigate to /pizza-maker WITHOUT REFRESHING the page  -->
+  <a mat-button routerLink="/pizza-maker" routerLinkActive="active">Kitchen</a>
+  <a mat-button routerLink="/previous-orders" routerLinkActive="active">Previous Orders</a>
+  @if(isLoggedIn()) {
+    <a mat-button (click)="onLogout()">Logout</a>
+  }
+  
+  <!-- @else {
+    <ng-container>
+      <a mat-button routerLink="/login" routerLinkActive="active">Login</a>
+      <a mat-button routerLink="/registe" routerLinkActive="active">Register</a>
+    </ng-container>
+  } -->
+
+  @if(!isLoggedIn()) {
+    <ng-container>
+      <a mat-button routerLink="/login" routerLinkActive="active">Login</a>
+      <a mat-button routerLink="/registe" routerLinkActive="active">Register</a>
+    </ng-container>
+  }
+</mat-toolbar>

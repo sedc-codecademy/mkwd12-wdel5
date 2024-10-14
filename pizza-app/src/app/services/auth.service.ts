@@ -54,7 +54,7 @@ export class AuthService {
       tap((response: LoginResponse) => {
         this.#setToken(response.result.token, response.result.validTo)
         if (!this.#isTokenValid()) {
-          throw new Error('Error whil logging in');
+          throw new Error('Error while logging in');
         }
         this.isLoggedIn.set(true);
         this.snackBar.open(
