@@ -21,6 +21,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
+  hidePassword: boolean = true;
+
   regiserForm: FormGroup = new FormGroup({
     username: new FormControl<string>('', Validators.required),
     email: new FormControl<string>('', [Validators.email, Validators.required]),
