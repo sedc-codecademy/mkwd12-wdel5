@@ -1,1 +1,32 @@
-<p>login works!</p>
+<div class="wrapper">
+  <form [formGroup]="loginForm">
+    <h1>Login</h1>
+
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input type="text" matInput placeholder="Enter Username..." formControlName="username"/>
+    </mat-form-field>
+    @if (hasNameRequiredError) {
+      <mat-error>
+        Username is required
+      </mat-error>
+    }
+
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input [type]="hidePassword ? 'password' : 'text'"  matInput placeholder="Enter password..." formControlName="password"/>
+      <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+    </mat-form-field>
+    @if (hasPasswordRequiredError) {
+      <mat-error>
+        Password is required
+      </mat-error>
+    }
+
+    <button [disabled]="loginForm.invalid" mat-raised-button color="primary" (click)="onLogin()">Register</button>
+
+  </form>
+</div>
+

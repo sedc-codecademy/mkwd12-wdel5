@@ -1,1 +1,52 @@
-<p>register works!</p>
+<div class="wrapper">
+  <form [formGroup]="registerForm">
+    <h1>Register</h1>
+
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input type="text" matInput placeholder="Enter Username..." formControlName="username"/>
+    </mat-form-field>
+    @if (hasNameRequiredError) {
+      <mat-error>
+        Username is required
+      </mat-error>
+    }
+
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input type="email" matInput placeholder="Enter email..." formControlName="email"/>
+    </mat-form-field>
+    @if (hasEmailError) {
+      <mat-error>
+        Enter valid email address
+      </mat-error>
+    }
+
+    @if (hasEmailRequiredError) {
+      <mat-error>
+        Email is required
+      </mat-error>
+    }
+
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input [type]="hidePassword ? 'password' : 'text'"  matInput placeholder="Enter password..." formControlName="password"/>
+      <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+    </mat-form-field>
+    @if (hasMinLengthError) {
+      <mat-error>
+        Password must be at least 8 caracters long
+      </mat-error>
+    }
+    @if (hasPasswordRequiredError) {
+      <mat-error>
+        Password is required
+      </mat-error>
+    }
+
+    <button [disabled]="registerForm.invalid" mat-raised-button color="primary" (click)="onRegister()">Register</button>
+
+  </form>
+</div>
