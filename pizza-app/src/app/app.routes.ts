@@ -18,5 +18,11 @@ export const routes: Routes = [
     loadComponent: () => import('./components/login/login.component').then(
       (module) => module.LoginComponent
     )
-  }
+  },
+  { 
+    path: 'pizza-maker', 
+    loadComponent: () => import('./components/pizza-maker/pizza-maker.component').then(
+      (module) => module.PizzaMakerComponent
+    )
+  },
 ];

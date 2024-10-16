@@ -1,0 +1,33 @@
+<h1>Selected ingredients:</h1>
+
+<mat-list role="list">
+  @for (ingredient of selectedIngredients(); track ingredient) {
+    <div class="list-item-wrapper">
+      <mat-list-item role="listitem">
+        {{ ingredient | normalizeEnum }}
+      </mat-list-item>
+      <div class="ingredients-action-btns">
+        <button mat-mini-fab="warn" (click)="onDeleteIngredient(ingredient)"></button>
+        <mat-icon>delete</mat-icon>
+      </div>
+    </div>
+  }
+</mat-list>
+
+<mat-button-toggle-group [value]="size" (change)="onSizeChange($event)">
+  <mat-button-toggle value="SMALL">Small</mat-button-toggle>
+  <mat-button-toggle value="MEDIUM">Medium</mat-button-toggle>
+  <mat-button-toggle value="LARGE">Large</mat-button-toggle>
+</mat-button-toggle-group>
+
+<div class="pizza-action-btns">
+  <button [disabled]="!selectedIngredients().length" mat-raised-button color="primary" (click)="savePizza()">
+    Make Order
+  </button>
+  <button [disabled]="!selectedIngredients().length" mat-raised-button color="primary" (click)="savePizzaAndMakeAnother()">
+    Make Another Pizza
+  </button>
+  <button mat-raised-button color="warn" (click)="onReset()">
+    Reset
+  </button>
+</div>
