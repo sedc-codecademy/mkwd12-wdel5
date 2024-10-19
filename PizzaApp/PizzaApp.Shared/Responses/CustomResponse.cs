@@ -3,7 +3,7 @@
     public class CustomResponse
     {
         public bool IsSuccessfull { get; set; } = false;
-        public IEnumerable<string> Errors { get; protected set; } = new List<string>();
+        public IEnumerable<string> Errors { get; set; } = new List<string>();
 
         public static CustomResponse Succes => new(true);
         public CustomResponse(params string[] errors) => Errors = errors;

@@ -1,11 +1,11 @@
 <mat-stepper [linear]="true">
-  <mat-step>
+  <mat-step [completed]="hasorders()">
     <ng-template matStepLabel>Choose ingredients</ng-template>
-    <!-- Ingredients component -->
+    <app-ingredients />
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Preview order</ng-template>
-    <!-- Preview-order component -->
+    <app-preview-order />
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Checkout</ng-template>

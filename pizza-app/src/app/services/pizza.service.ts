@@ -91,9 +91,10 @@ export class PizzaService {
     return this.http.get<Pizza[]>(`${apiUrl}/Pizza`);
   }
 
-  deletePizzaFromOrder(index: number): void {
-    const updatedOrder = this.activeOrder()
-    .filter((_, i) => i !== index);
+  deletePizzaFromOrder(id: number): void {
+    const updatedOrder = this.activeOrder().filter(pizza => pizza.id !== id);
+    console.log(this.activeOrder(), id);
+    this.updateActiveOrder(updatedOrder);
   }
 
   deletePizza(id: number): Observable<void> {

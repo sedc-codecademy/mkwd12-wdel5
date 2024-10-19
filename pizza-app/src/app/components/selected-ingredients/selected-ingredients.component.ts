@@ -8,7 +8,6 @@ import { NormalizeEnumPipe } from '../../pipes/normalize-enum.pipe';
 import { Ingredient } from '../../types/enums/ingredients.enum';
 import { PizzaSize } from '../../types/enums/pizza-size.enum';
 import { PizzaService } from '../../services/pizza.service';
-import { AuthService } from '../../services/auth.service';
 import { calculatePizzaPrice } from '../../helpers/pizza.helper';
 import { MatStepper } from '@angular/material/stepper';
 

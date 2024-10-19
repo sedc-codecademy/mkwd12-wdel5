@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, computed } from '@angular/core';
 import { MatStepperModule } from '@angular/material/stepper'
 import { PizzaService } from '../../services/pizza.service';
+import { IngredientsComponent } from "../ingredients/ingredients.component";
+import { PreviewOrderComponent } from "../preview-order/preview-order.component";
 
 
 @Component({
@@ -10,8 +12,9 @@ import { PizzaService } from '../../services/pizza.service';
   imports: [
     CommonModule,
     MatStepperModule,
-    // Add the rest of components here
-  ],
+    IngredientsComponent,
+    PreviewOrderComponent
+],
   templateUrl: './pizza-maker.component.html',
   styleUrl: './pizza-maker.component.scss'
 })

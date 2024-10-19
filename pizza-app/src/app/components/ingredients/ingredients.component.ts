@@ -3,6 +3,7 @@ import { Component, computed } from '@angular/core';
 import { PizzaService } from '../../services/pizza.service';
 import { Ingredient } from '../../types/enums/ingredients.enum';
 import { IngredientsListComponent } from "../ingredients-list/ingredients-list.component";
+import { SelectedIngredientsComponent } from "../selected-ingredients/selected-ingredients.component";
 
 @Component({
   selector: 'app-ingredients',
@@ -11,7 +12,8 @@ import { IngredientsListComponent } from "../ingredients-list/ingredients-list.c
     CommonModule
     // add ingredients list and selected ingredients components
     ,
-    IngredientsListComponent
+    IngredientsListComponent,
+    SelectedIngredientsComponent
 ],
   templateUrl: './ingredients.component.html',
   styleUrl: './ingredients.component.scss'

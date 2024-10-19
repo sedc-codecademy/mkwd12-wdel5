@@ -95,11 +95,13 @@ namespace PizzaApp.Services.UserServices.Implementations
 
                 var user = await _userManager.FindByNameAsync(request.Username);
                 if (user == null)
-                    return new("user doesnt exist");
+                    //return new("user doesnt exist");
+                    return new CustomResponse<LoginUserResponseDto>() { IsSuccessfull = false, Errors = new List<string> { "user dont exists!" } };
 
                 bool IsPasswordValid = await _userManager.CheckPasswordAsync(user, request.Password);
                 if (!IsPasswordValid)
-                    return new("invalid password");
+                    //return new("invalid password");
+                    return new CustomResponse<LoginUserResponseDto>() { IsSuccessfull = false, Errors = new List<string> { "passwords dont match!" } };
 
                 var token = await _tokenService.GenerateTokenAsync(user);
 
