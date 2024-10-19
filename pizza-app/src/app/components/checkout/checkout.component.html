@@ -1,0 +1,26 @@
+<div class="wrapper">
+  <div class="container">
+    <mat-form-field>
+      <mat-label>Address</mat-label>
+      <span matIconPrefix>
+        <mat-icon>home</mat-icon>
+      </span>
+      <input type="text" matInput placeholder="Ex. Partizanska 11b, Skopje, Macedonia..." [formControl]="address">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <span matIconPrefix>
+        <mat-icon>description</mat-icon>
+      </span>
+      <input type="text" matInput placeholder="Ex. Extra ketchup, no seasoning..." [formControl]="description">
+    </mat-form-field>
+    <button
+      mat-raised-button
+      [disabled]="address.invalid"
+      color="primary"
+      (click)="onSubmitOrder()"
+    >
+      Make order
+    </button>
+  </div>
+</div>

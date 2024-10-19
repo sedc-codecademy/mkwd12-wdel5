@@ -4,6 +4,7 @@ import { MatStepperModule } from '@angular/material/stepper'
 import { PizzaService } from '../../services/pizza.service';
 import { IngredientsComponent } from "../ingredients/ingredients.component";
 import { PreviewOrderComponent } from "../preview-order/preview-order.component";
+import { CheckoutComponent } from "../checkout/checkout.component";
 
 
 @Component({
@@ -13,7 +14,8 @@ import { PreviewOrderComponent } from "../preview-order/preview-order.component"
     CommonModule,
     MatStepperModule,
     IngredientsComponent,
-    PreviewOrderComponent
+    PreviewOrderComponent,
+    CheckoutComponent
 ],
   templateUrl: './pizza-maker.component.html',
   styleUrl: './pizza-maker.component.scss'

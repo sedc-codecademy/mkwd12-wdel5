@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
+import { NotAllowedComponent } from './components/not-allowed/not-allowed.component';
 
 export const routes: Routes = [
   // localhost:4200
@@ -25,4 +26,12 @@ export const routes: Routes = [
       (module) => module.PizzaMakerComponent
     )
   },
-];
+  { 
+    path: 'previous-orders', 
+    loadComponent: () => import('./components/previous-orders/previous-orders.component').then(
+      (module) => module.PreviousOrdersComponent
+    )
+  },
+  { path: 'not-allowed', component: NotAllowedComponent},
+  { path: '**', redirectTo: 'not-allowed' }
+]; 

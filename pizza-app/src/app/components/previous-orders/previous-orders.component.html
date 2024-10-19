@@ -1,0 +1,20 @@
+<div class="wrapper">
+  <div class="container">
+    <h3>Previous orders</h3>
+    @for (order of (orders$ | async); track order.id) {
+      <mat-list-item>
+        <div matListItemTitle class="order-content">
+          <span class="descriptin">
+            <mat-icon>local_pizza</mat-icon>
+            {{ order.description }}
+          </span>
+          <span class="price">
+            <mat-icon>money</mat-icon>
+            {{ order.orderPrice | currency: 'EUR': 'code' }}
+          </span>
+        </div>
+        
+      </mat-list-item>
+    }
+  </div>
+</div>

@@ -3,31 +3,33 @@
     <h1>Your order:</h1>
     <mat-list>
       @for (pizza of activeOrder(); track pizza) {
-        <mat-list-item>
-          <span matListItemTitle>
-            {{ pizza.name }}
-          </span>
-          <span matListItemLine>
-            Size: {{ pizza.size | lowercase }} | Ingredients:
-            {{ pizza.ingredients | normalizeEnum }}
-          </span>
-          <span matListItemLine>
-            Price: {{ pizza.price | currency: 'EUR': 'symbol' }}
-          </span>
-          <button mat-icon-button="warn" (click)="onDeletePizza(pizza.id)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </mat-list-item>
-      }
+      <mat-list-item>
+        <span matListItemTitle>
+          {{ pizza.name }}
+        </span>
+        <span matListItemLine>
+          Size: {{ pizza.size | lowercase }} | Ingredients:
+          {{ pizza.ingredients | normalizeEnum }}
+        </span>
+        <span matListItemLine>
+          Price: {{ pizza.price | currency: 'EUR' }}
+        </span>
+        <button mat-icon-button color="warn" (click)="onDeletePizza(pizza.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-list-item>
+    }
     </mat-list>
 
     <div>
-      <h3>Total price: 
+      <h3>
+        Total price:
         {{
-          calculateTotalPrice(activeOrder()) | currency: 'EUR'
+        calculateTotalPrice(activeOrder())
+        | currency: 'EUR'
         }}
       </h3>
-      <button mat-raised-button color="primary" matStepperNext>
+      <button mat-raised-button matStepperNext color="primary">
         Go to checkout
       </button>
     </div>
