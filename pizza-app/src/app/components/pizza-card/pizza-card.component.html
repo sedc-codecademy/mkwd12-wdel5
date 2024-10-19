@@ -1,5 +1,5 @@
 @if (!!pizza) {
-<mat-card>
+<mat-card appHotPizza [ingredients]="pizza.ingredients">
   <mat-card-header>{{ pizza.name }}</mat-card-header>
   <img mat-card-image height="300px" width="300px" [src]="pizza.image" [alt]="pizza.name">
   <mat-card-content>

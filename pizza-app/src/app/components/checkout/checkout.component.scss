@@ -1,8 +1,13 @@
 .wrapper {
-  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+  padding-top: 20px;
 }
 
 .container {
   display: flex;
   flex-direction: column;
+  width: 60%;
 }

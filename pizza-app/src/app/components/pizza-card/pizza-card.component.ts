@@ -9,6 +9,7 @@ import { AuthService } from '../../services/auth.service';
 import { PizzaService } from '../../services/pizza.service';
 import { Router } from '@angular/router';
 import { NormalizeEnumPipe } from "../../pipes/normalize-enum.pipe";
+import { HotPizzaDirective } from '../../directives/hot-pizza.directive';
 
 @Component({
   selector: 'app-pizza-card',
@@ -18,10 +19,9 @@ import { NormalizeEnumPipe } from "../../pipes/normalize-enum.pipe";
     MatCardModule,
     MatChipsModule,
     MatIconModule,
-    MatButtonModule
-    // custom pipe
-    ,
-    NormalizeEnumPipe
+    MatButtonModule,
+    NormalizeEnumPipe,
+    HotPizzaDirective
 ],
   templateUrl: './pizza-card.component.html',
   styleUrl: './pizza-card.component.scss'
